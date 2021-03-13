@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <title>addArticleType</title>
+</head>
+<body>
+<form th:action="@{/addArticleType}" method="post">
+
+    <div class="form-group">
+        <label for="articleTypeName">文章类型名称</label>
+        <input type="text" class="form-control" id="articleTypeName" name="articleTypeName">
+    </div>
+    文章类型状态：<input type="radio" id="enabled" name="articleTypeStatus" value="enabled">
+    <label for="enabled">启用</label>
+    <input type="radio" id="disabled" name="articleTypeStatus" value="disabled">
+    <label for="disabled">禁用</label><br>
+<!--    <div class="custom-control custom-radio custom-control-inline">-->
+<!--        <input type="radio" id="enabled" name="articleStatus" class="custom-control-input">-->
+<!--        <label class="custom-control-label" for="enabled">启用</label>-->
+<!--    </div>-->
+<!--    <div class="custom-control custom-radio custom-control-inline">-->
+<!--        <input type="radio" id="disabled" name="articleStatus" class="custom-control-input">-->
+<!--        <label class="custom-control-label" for="disabled">禁用</label>-->
+<!--    </div>-->
+    <input type="submit" value="添加文章类型">
+
+</form>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
