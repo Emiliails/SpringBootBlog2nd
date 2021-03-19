@@ -1,8 +1,8 @@
 package com.niu.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class ArticleType {
@@ -14,8 +14,30 @@ public class ArticleType {
     private String articleTypeName;
     private String articleTypeStatus;
 
+    @ManyToOne
+    private User user;
+
+    @OneToMany(mappedBy = "articleType")
+    private Set<Article> articles = new HashSet<>();
+
     public ArticleType() {
 
+    }
+
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getArticleTypeId() {

@@ -3,6 +3,9 @@ package com.niu.demo.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -23,8 +26,41 @@ public class User {
     private String registerDate;
     private String role;
 
+    @OneToMany(mappedBy = "user")
+    private Set<ArticleType> articleTypes = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Article> articles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Comment> comments = new HashSet<>();
+
     public User() {
 
+    }
+
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Set<ArticleType> getArticleTypes() {
+        return articleTypes;
+    }
+
+    public void setArticleTypes(Set<ArticleType> articleTypes) {
+        this.articleTypes = articleTypes;
     }
 
     public String getWechat() {
