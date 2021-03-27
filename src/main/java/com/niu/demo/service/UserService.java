@@ -17,7 +17,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    public List<User> findByUserName(String userName) {
+        return userRepository.findByUserNameContaining(userName);
     }
 }
