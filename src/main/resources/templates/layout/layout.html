@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>layout</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}" type="text/css"/>
+    <script th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{layout/fragment::header}"></div>
+
+    <h2>layout</h2>
+    <div layout:fragment="content">
+        this line will be replaced.
+    </div>
+
+    <div th:replace="~{layout/fragment::footer}"></div>
+</div>
+</body>
+</html>
