@@ -17,6 +17,7 @@ public class Article {
     @Transient
     private String articleTypeName;
 
+    @Column(columnDefinition = "TEXT")
     private String articleContent;
 
     private String articleCreateDate;

@@ -65,9 +65,17 @@ public class ArticleController {
         return "/modifyArticle";
     }
 
+
     @PostMapping("/modifyArticle")
     @ResponseBody
     public Article modifyArticle(int articleId, String articleName, String articleTypeName, String modifyDate, String articleContent) {
-        return articleService.modify(articleId,articleName,articleTypeName,modifyDate,articleContent);
+        return articleService.modify(articleId, articleName, articleTypeName, modifyDate, articleContent);
+    }
+
+    @GetMapping("/displayArticle")
+    public String displayArticle(Model model, @RequestParam("articleId") int articleId) {
+        Article article = articleService.findByArticleId(articleId);
+        model.addAttribute("article", article);
+        return "/displayArticle";
     }
 }
