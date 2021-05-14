@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>modify</title>
+    <title>modifyArticleType</title>
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}" type="text/css"/>
     <script th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
@@ -27,14 +27,12 @@
             <div class="form-group">
                 <label for="articleTypeStatus">文章类型状态</label>
                 <select multiple class="form-control" id="articleTypeStatusInput" name="articleTypeStatus">
-                    <!--                <c:forEach items="${articleTypeList}" var="articleType">-->
                     <option>enabled</option>
                     <option>disabled</option>
-                    <!--                </c:forEach>-->
                 </select>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" id="modifyArticleTypeFormSubmit">添加</button>
+        <button type="button" class="btn btn-primary" id="modifyArticleTypeFormSubmit">修改</button>
     </form>
     <br>
     <!--    文章类型修改成功的回传信息-->
@@ -60,7 +58,7 @@
 
     <script>
         $(function () {
-            // 修改文章的ajax
+            // 修改文章类型的ajax
             $("#modifyArticleTypeFormSubmit").click(function () {
                 $.post({
                     url: "/modifyArticleType",
@@ -73,7 +71,7 @@
                     }
                 })
             })
-            // 获取文章的ajax
+            // 获取文章类型的ajax
             $("#getArticleTypeList").click(function () {
                 $.get({
                     url: "/getArticleTypesJson",

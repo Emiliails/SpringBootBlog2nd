@@ -43,13 +43,6 @@ public class ArticleTypeController {
         model.addAttribute("articleTypeList", articleTypeList);
         return "/getArticleTypes";
     }
-//    //修改我的文章
-//    @GetMapping("/modifyPassage")
-//    public String modifyPassage(Model model, @RequestParam("passageId") int passageId) {
-//        Passage passage = passageService.findByPassageId(passageId);
-//        model.addAttribute("passage", passage);
-//        return "user/modifyPassage";
-//    }
 
     @GetMapping("/modifyArticleType")
     public String modifyArticleType(Model model, @RequestParam("articleTypeId") int articleTypeId) {

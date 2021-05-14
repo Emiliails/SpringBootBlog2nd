@@ -4,29 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>addArticle</title>
+    <title>modifyArticle</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}" type="text/css"/>
     <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
-    <!--    添加文章的表单-->
-    <form th:action="@{/addArticle}" method="POST" id="addArticleForm">
+    <!--    修改文章的表单-->
+    <form th:action="@{/modifyArticle}" method="POST" id="modifyArticleForm">
+        <div class="form-group">
+            <label for="articleIdInput">文章ID</label>
+            <input class="form-control" th:type="text" id="articleIdInput" name="articleId"
+                   th:placeholder="${article.articleId}"
+                   th:value="${article.articleId}" readonly>
+        </div>
         <div class="form-group">
             <label for="articleNameInput">文章名称</label>
             <input type="text" class="form-control" id="articleNameInput" name="articleName">
         </div>
         <div class="form-group">
             <label for="articleTypeNameInput">文章类型</label>
-            <select multiple class="form-control" id="articleTypeNameInput" name="articleType.articleTypeName">
+            <select multiple class="form-control" id="articleTypeNameInput" name="articleTypeName">
                 <option th:each="articleType:${articleTypeList}" th:text="${articleType.articleTypeName}"
                         th:value="${articleType.articleTypeName}"></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="articleCreateDateInput">创建日期</label>
-            <input type="text" class="form-control" id="articleCreateDateInput" name="articleCreateDate"
+            <label for="articleModifyDateInput">修改日期</label>
+            <input type="text" class="form-control" id="articleModifyDateInput" name="modifyDate"
                    th:value="${#dates.format(#dates.createNow(), 'YYYY/MM/dd')}" readonly>
         </div>
         <div class="form-group">
@@ -34,10 +40,10 @@
             <textarea class="form-control" id="articleContentInput" name="articleContent">
         </textarea>
         </div>
-        <button type="button" class="btn btn-primary" id="addArticleFormSubmit">添加</button>
+        <button type="button" class="btn btn-primary" id="modifyArticleFormSubmit">修改</button>
     </form>
     <br>
-    <!--    文章添加成功的回传信息-->
+    <!--    文章修改成功的回传信息-->
     <div id="msg"></div>
     <div id="articleName"></div>
     <div id="articleContent"></div>
@@ -60,11 +66,11 @@
 
     <script>
         $(function () {
-            // 添加文章的ajax
-            $("#addArticleFormSubmit").click(function () {
+            // 修改文章的ajax
+            $("#modifyArticleFormSubmit").click(function () {
                 $.post({
-                    url: "/addArticle",
-                    data: $("#addArticleForm").serialize(),
+                    url: "/modifyArticle",
+                    data: $("#modifyArticleForm").serialize(),
                     success: function (data, status) {
                         $("#msg").text(status);
                         $("#articleName").text(data.articleName);

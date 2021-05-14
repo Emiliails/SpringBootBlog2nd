@@ -12,7 +12,6 @@ public class ArticleType {
     @Id
     @GeneratedValue
     private int articleTypeId;
-
     private String articleTypeName;
     private String articleTypeStatus;
 

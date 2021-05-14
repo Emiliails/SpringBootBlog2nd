@@ -29,7 +29,8 @@ public class ArticleTypeService {
     }
 
     public ArticleType findByArticleTypeId(int articleTypeId) {
-        return articleTypeRepository.findByArticleTypeId(articleTypeId);
+        return articleTypeRepository.findById(articleTypeId).get();
+//        return articleTypeRepository.findByArticleTypeId(articleTypeId);
     }
 
     public ArticleType modify(int articleTypeId, String articleTypeName, String articleTypeStatus) {

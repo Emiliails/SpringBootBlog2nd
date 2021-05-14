@@ -1,5 +1,7 @@
 package com.niu.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +14,9 @@ public class Article {
 
     private String articleName;
 
+    @Transient
+    private String articleTypeName;
+
     private String articleContent;
 
     private String articleCreateDate;
@@ -19,9 +24,11 @@ public class Article {
     private String articleModifyDate;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private ArticleType articleType;
 
     @OneToMany(mappedBy = "article")
@@ -79,6 +86,14 @@ public class Article {
         this.articleModifyDate = articleModifyDate;
     }
 
+    public String getArticleTypeName() {
+        return articleTypeName;
+    }
+
+    public void setArticleTypeName(String articleTypeName) {
+        this.articleTypeName = articleTypeName;
+    }
+
     public ArticleType getArticleType() {
         return articleType;
     }
@@ -90,6 +105,7 @@ public class Article {
     public Set<Comment> getComments() {
         return comments;
     }
+
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
