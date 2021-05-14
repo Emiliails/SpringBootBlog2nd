@@ -13,10 +13,10 @@
 <body>
 <div layout:fragment="content">
     <h1 class="text-center" th:text="${article.articleName}"></h1>
-    <h2 class="text-left" th:text="'文章类型'+${article.articleType.articleTypeName}"></h2>
-    <br>
+    <h6 class="text-left" th:text="'文章类型'+${article.articleType.articleTypeName}"></h6>
     <h6 th:text="'发布时间'+${article.articleCreateDate}"></h6>
     <h6 th:text="'修改时间'+${article.articleModifyDate}"></h6>
+    <hr>
     <p th:text="${article.articleContent}"></p>
 </div>
 

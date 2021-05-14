@@ -40,4 +40,24 @@ public class UserService implements UserDetailsService {
         }
         return user;
     }
+
+    public User findById(int userId) {
+        return userRepository.findById(userId).get();
+    }
+
+    public User modify(int userId, String userName, String password, String name, String gender, String birthday,
+                       String phone, String email, String wechat, String description) {
+        User user = userRepository.findById(userId).get();
+        user.setUserName(userName);
+        user.setPassword(password);
+        user.setName(name);
+        user.setGender(gender);
+        user.setBirthday(birthday);
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setWechat(wechat);
+        user.setDescription(description);
+        userRepository.save(user);
+        return user;
+    }
 }

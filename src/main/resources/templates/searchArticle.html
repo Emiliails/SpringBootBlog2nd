@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>searchArticle</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}" type="text/css"/>
+    <script th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>查询文章</h1>
+    <form class="form-inline my-2 my-lg-0" th:action="@{/searchArticle}" method="post">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+               name="articleNameLike" id="articleNameLike">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">按文章名模糊查询</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>文章ID</th>
+            <th>文章名称</th>
+            <th>文章类型</th>
+            <!--      <th>删除文章</th>-->
+            <!--      <th>修改文章</th>-->
+            <th>查看文章</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="article:${articleList}">
+            <td th:text="${article.user.userName}"></td>
+            <td th:text="${article.articleId}"></td>
+            <td th:text="${article.articleName}"></td>
+            <td th:text="${article.articleType.articleTypeName}"></td>
+            <!--      <td><a th:href="@{'/deleteArticle?articleId='+${article.articleId}}">删除</a></td>-->
+            <!--      <td><a th:href="@{'/modifyArticle?articleId='+${article.articleId}}">修改</a></td>-->
+            <td><a th:href="@{'/displayArticle?articleId='+${article.articleId}}">查看</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+this line will not be displayed.
+
+</body>
+</html>

@@ -42,6 +42,13 @@ public class ArticleController {
         return "/getArticles";
     }
 
+    @GetMapping("/getAllArticles")
+    public String getAllArticles(Model model) {
+        List<Article> articleList = articleService.findAll();
+        model.addAttribute("articleList", articleList);
+        return "/getAllArticles";
+    }
+
     @GetMapping("/getArticlesJson")
     @ResponseBody
     public List<Article> getArticlesJson() {
@@ -77,5 +84,17 @@ public class ArticleController {
         Article article = articleService.findByArticleId(articleId);
         model.addAttribute("article", article);
         return "/displayArticle";
+    }
+
+    @GetMapping("/searchArticle")
+    public String searchArticle() {
+        return "searchArticle";
+    }
+
+    @PostMapping("/searchArticle")
+    public String searchArticle(Model model, String articleNameLike) {
+        List<Article> articleList = articleService.findByArticleNameLike(articleNameLike);
+        model.addAttribute(articleList);
+        return "searchArticle";
     }
 }

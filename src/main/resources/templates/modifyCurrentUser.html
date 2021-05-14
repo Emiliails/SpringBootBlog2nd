@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org">>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>modifyCurrentUser</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}" type="text/css"/>
+  <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+  <form th:action="@{/modifyCurrentUser}" method="post" id="form1">
+    <div class="form-group">
+      <div class="form-group">
+        <label for="userIdInput">用户ID</label>
+        <input class="form-control" th:type="text" id="userIdInput" name="userId"
+               th:placeholder="${user.userId}"
+               th:value="${user.userId}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="userNameInput">用户名</label>
+        <input type="text" class="form-control" name="userName" id="userNameInput" th:value="${user.userName}">
+      </div>
+      <div class="form-group">
+        <label for="passwordInput">密码</label>
+        <input type="password" class="form-control" name="password" id="passwordInput"
+               th:value="${user.password}">
+      </div>
+      <div class="form-group">
+        <label for="nameInput">姓名</label>
+        <input type="text" class="form-control" name="name" id="nameInput" th:value="${user.name}">
+      </div>
+      <div class="form-group">
+        <label for="genderInput">性别</label>
+        <input type="text" class="form-control" name="gender" id="genderInput" th:value="${user.gender}">
+      </div>
+      <div class="form-group">
+        <label for="birthdayInput">出生日期</label>
+        <input type="text" class="form-control" name="birthday" id="birthdayInput" th:value="${user.birthday}">
+      </div>
+      <div class="form-group">
+        <label for="phoneInput">手机</label>
+        <input type="text" class="form-control" name="phone" id="phoneInput" th:value="${user.phone}">
+      </div>
+      <div class="form-group">
+        <label for="emailInput">Email</label>
+        <input type="text" class="form-control" name="email" id="emailInput" th:value="${user.email}">
+      </div>
+      <div class="form-group">
+        <label for="wechatInput">微信号</label>
+        <input type="text" class="form-control" name="wechat" id="wechatInput" th:value="${user.wechat}">
+      </div>
+      <div class="form-group">
+        <label for="descriptionInput">描述信息</label>
+        <input type="text" class="form-control" name="description" id="descriptionInput"
+               th:value="${user.description}">
+      </div>
+      <div class="form-group">
+        <label for="registerDateInput">注册日期</label>
+        <input type="text" class="form-control" name="registerDate" id="registerDateInput"
+               th:value="${user.registerDate}">
+      </div>
+      <div class="form-group">
+        <label for="roleInput">角色</label>
+        <input type="text" class="form-control" name="role" id="roleInput" th:value="${user.role}">
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="formSubmit">添加用户</button>
+  </form>
+  <br>
+  <div id="msg"></div>
+  <div id="userId"></div>
+  <div id="userName"></div>
+
+  <!--    <hr>-->
+  <!--    <input type="button" id="getUsers" value="全部用户">-->
+  <!--    <table id="table1" border="1" style="border-collapse: collapse"></table>-->
+
+  <script>
+    $(function () {
+      //添加用户的ajax
+      $("#formSubmit").click(function () {
+        $.post({
+          url: "/modifyUser",
+          data: $("#form1").serialize(),
+          success: function (data, status) {
+            $("#userId").text(data.userId);
+            $("#userName").text(data.userName);
+            $("#msg").text(status);
+          }
+        })
+      })
+      //显示所有用户的ajax
+      // $("#getUsers").click(function () {
+      //     $.get({
+      //         url: "/getUsers",
+      //         success: function (data, status) {
+      //             //清空表格数据
+      //             $("table1").empty();
+      //             //data是user集合，遍历之
+      //             for (var index in data) {
+      //                 //组装行
+      //                 var row = $("<tr><tr>");
+      //                 var userId = $("<td>" + data[index].userId + "</td>");
+      //                 var userName = $("<td>" + data[index].userName + "</td>");
+      //                 var name = $("<td>" + data[index].name + "</td>");
+      //                 row.append(userId);
+      //                 row.append(userName);
+      //                 row.append(name);
+      //                 //在表格中加入行
+      //                 $("#table1").append(row);
+      //             }
+      //         }
+      //     })
+      // })
+    })
+
+  </script>
+</div>
+</body>
+</html>

@@ -49,4 +49,12 @@ public class ArticleService {
         articleRepository.save(article);
         return article;
     }
+
+    public List<Article> findAll() {
+        return articleRepository.findAll();
+    }
+
+    public List<Article> findByArticleNameLike(String articleNameLike) {
+        return articleRepository.findByArticleNameLike(articleNameLike);
+    }
 }

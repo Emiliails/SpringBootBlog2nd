@@ -13,19 +13,29 @@
 <div layout:fragment="content">
     <form th:action="@{/addUser}" method="post" id="form1">
         <div class="form-group">
-            用户名：<input type="text" name="userName"><br>
-            密码：<input type="password" name="password"><br>
-            姓名：<input type="text" name="name"><br>
-            性别：<input type="text" name="gender"><br>
-            出生日期：<input type="text" name="birthday"><br>
-            手机：<input type="text" name="phone"><br>
-            Email：<input type="text" name="text"><br>
-            微信号：<input type="text" name="wechat"><br>
-            描述信息：<input type="text" name="description"><br>
-            注册日期：<input type="text" name="registerDate"><br>
-            角色：<input type="text" name="role"><br>
+            <label for="userNameInput">用户名</label>
+            <input type="text" name="userName" id="userNameInput">
+            <label for="passwordInput">密码</label>
+            <input type="password" name="password" id="passwordInput"><br>
+            <label for="nameInput">姓名</label>
+            <input type="text" name="name" id="nameInput"><br>
+            <label for="genderInput"></label>
+            <input type="text" name="gender" id="genderInput">性别<br>
+            <label for="birthdayInput"></label>
+            <input type="text" name="birthday" id="birthdayInput">出生日期<br>
+            <label for="phoneInput"></label>
+            <input type="text" name="phone" id="phoneInput">手机<br>
+            <label for="phoneInput"></label>
+            <input type="text" name="email" id="emailInput">Email<br>
+            <label for="emailInput"></label>
+            <input type="text" name="wechat" id="wechatInput">微信号<br>
+            <label for="wechatInput"></label>
+            <input type="text" name="description" id="descriptionInput">描述信息<br>
+            <label for="descriptionInput"></label>
+            <input type="text" name="registerDate" id="registerDateInput">注册日期<br>
+            <label for="registerDateInput"></label>
+            <input type="text" name="role" id="roleInput">角色<br>
         </div>
-        <!--    <input type="button" id="formSubmit" value="添加用户">-->
         <button type="button" class="btn btn-primary" id="formSubmit">添加用户</button>
     </form>
     <br>
@@ -33,9 +43,9 @@
     <div id="userId"></div>
     <div id="userName"></div>
 
-    <hr>
-    <input type="button" id="getUsers" value="全部用户">
-    <table id="table1" border="1" style="border-collapse: collapse"></table>
+    <!--    <hr>-->
+    <!--    <input type="button" id="getUsers" value="全部用户">-->
+    <!--    <table id="table1" border="1" style="border-collapse: collapse"></table>-->
 
     <script>
         $(function () {
@@ -52,28 +62,28 @@
                 })
             })
             //显示所有用户的ajax
-            $("#getUsers").click(function () {
-                $.get({
-                    url: "/getUsers",
-                    success: function (data, status) {
-                        //清空表格数据
-                        $("table1").empty();
-                        //data是user集合，遍历之
-                        for (var index in data) {
-                            //组装行
-                            var row = $("<tr><tr>");
-                            var userId = $("<td>" + data[index].userId + "</td>");
-                            var userName = $("<td>" + data[index].userName + "</td>");
-                            var name = $("<td>" + data[index].name + "</td>");
-                            row.append(userId);
-                            row.append(userName);
-                            row.append(name);
-                            //在表格中加入行
-                            $("#table1").append(row);
-                        }
-                    }
-                })
-            })
+            // $("#getUsers").click(function () {
+            //     $.get({
+            //         url: "/getUsers",
+            //         success: function (data, status) {
+            //             //清空表格数据
+            //             $("table1").empty();
+            //             //data是user集合，遍历之
+            //             for (var index in data) {
+            //                 //组装行
+            //                 var row = $("<tr><tr>");
+            //                 var userId = $("<td>" + data[index].userId + "</td>");
+            //                 var userName = $("<td>" + data[index].userName + "</td>");
+            //                 var name = $("<td>" + data[index].name + "</td>");
+            //                 row.append(userId);
+            //                 row.append(userName);
+            //                 row.append(name);
+            //                 //在表格中加入行
+            //                 $("#table1").append(row);
+            //             }
+            //         }
+            //     })
+            // })
         })
 
     </script>
