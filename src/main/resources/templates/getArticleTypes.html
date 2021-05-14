@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>getArticleTypes</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}" type="text/css"/>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>文章类型</th>
+            <th>文章类型ID</th>
+            <th>文章类型状态</th>
+            <th>删除文章类型</th>
+            <th>修改文章类型</th>
+            <th>查看文章</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="articleType:${articleTypeList}">
+            <td th:text="${articleType.user.userName}"></td>
+            <td th:text="${articleType.articleTypeName}"></td>
+            <td th:text="${articleType.articleTypeId}"></td>
+            <td th:text="${articleType.articleTypeStatus}"></td>
+            <td><a th:href="@{'/deleteArticleType?articleTypeId='+${articleType.articleTypeId}}">删除</a></td>
+            <td><a th:href="@{'/modifyArticleType?articleTypeId='+${articleType.articleTypeId}}">修改</a></td>
+            <td></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>addArticle</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}" type="text/css"/>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <!--    添加文章的表单-->
+    <form th:action="@{/addArticle}" method="post" id="addArticleForm">
+        <div class="form-group">
+            <label for="articleNameInput">文章名称</label>
+            <input type="text" class="form-control" id="articleNameInput" name="articleName">
+        </div>
+
+        <button type="button" class="btn btn-primary" id="addArticleFormSubmit">添加</button>
+    </form>
+    <br>
+    <!--    文章添加成功的回传信息-->
+    <div id="msg"></div>
+    <div id="articleName"></div>
+    <div id="articleStatus"></div>
+
+    <!--    获取文章当前用户文章列表的按钮-->
+    <button type="button" class="btn btn-primary" id="getArticleList">获取文章列表</button>
+
+    <!--    文章列表-->
+    <table class="table table-hover" id="articleList">
+        <thead>
+        <tr>
+            <th>文章</th>
+            <th>文章状态</th>
+            <th>查看文章</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        $(function () {
+            // 添加文章的ajax
+            $("#addArticleFormSubmit").click(function () {
+                $.post({
+                    url: "/addArticle",
+                    data: $("#addArticleForm").serialize(),
+                    success: function (data, status) {
+                        $("#msg").text(status);
+                        $("#articleName").text(data.articleName);
+                        $("#articleStatus").text(data.articleStatus);
+                    }
+                })
+            })
+            // 获取文章的ajax
+            $("#getArticleList").click(function () {
+                $.get({
+                    url: "/getArticlesJson",
+                    success: function (data, status) {
+                        $("#articleList").empty();
+                        for (var index in data) {
+                            var row = $("<tr></tr>");
+                            var articleName = $("<td>" + data[index].articleName + "</td>");
+                            var articleStatus = $("<td>" + data[index].articleStatus + "</td>");
+                            row.append(articleName);
+                            row.append(articleStatus);
+                            $("#articleList").append(row);
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+</div>
+</body>
+</html>

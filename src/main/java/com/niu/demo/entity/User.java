@@ -1,5 +1,6 @@
 package com.niu.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,6 +30,7 @@ public class User implements UserDetails {
     private String role;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Set<ArticleType> articleTypes = new HashSet<>();
 
     @OneToMany(mappedBy = "user")

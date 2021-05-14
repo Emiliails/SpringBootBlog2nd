@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>addArticleType</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}" type="text/css"/>
+  <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+  <!--    添加文章类型的表单-->
+  <form th:action="@{/addArticleType}" method="post" id="addArticleTypeForm">
+    <div class="form-group">
+      <label for="articleTypeNameInput">文章类型名称</label>
+      <input type="text" class="form-control" id="articleTypeNameInput" name="articleTypeName">
+    </div>
+    <div class="form-group">
+      文章类型状态：<input type="radio" id="enabled" name="articleTypeStatus" value="enabled">
+      <label for="enabled">启用</label>
+      <input type="radio" id="disabled" name="articleTypeStatus" value="disabled">
+      <label for="disabled">禁用</label><br>
+    </div>
+    <button type="submit" class="btn btn-primary" id="addArticleTypeFormSubmit">添加</button>
+  </form>
+<!--  &lt;!&ndash;    文章类型添加成功的回传信息&ndash;&gt;-->
+<!--  <div>文章类型添加成功的回传信息如下</div>-->
+<!--  <div id="msg"></div>-->
+<!--  <div id="username"></div>-->
+<!--  <div id="articleTypeName"></div>-->
+
+<!--  &lt;!&ndash;    获取文章当前用户文章类型列表的按钮&ndash;&gt;-->
+<!--  <button type="button" class="btn btn-primary" id="getArticleTypeList">获取文章类型列表</button>-->
+
+<!--  &lt;!&ndash;    文章类型列表&ndash;&gt;-->
+<!--  <table class="table table-hover" id="articleTypeList">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>用户名</th>-->
+<!--      <th>文章类型</th>-->
+<!--      <th>查看文章</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="articleType:${articleTypeList}">-->
+<!--      <td th:text="${articleType.user.userName}"></td>-->
+<!--      <td th:text="${articleType.articleTypeName}"></td>-->
+<!--      &lt;!&ndash;            <td>${articleType.userName}</td>&ndash;&gt;-->
+<!--      &lt;!&ndash;            <td>${articleType.articleTypeName}</td>&ndash;&gt;-->
+<!--      <td>-->
+<!--        查看-->
+<!--        &lt;!&ndash;                <a href="manageArticleByUserNameAndArticleType?userName=${articleType.userName}&articleTypeName=${articleType.articleTypeName}">查看</a>&ndash;&gt;-->
+<!--      </td>-->
+<!--      <td th:text="${username}"></td>-->
+
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+
+
+<!--  <script>-->
+<!--    $(function () {-->
+<!--      &lt;!&ndash;    添加文章的AJAX&ndash;&gt;-->
+<!--      $("#addArticleTypeFormSubmit").click(function () {-->
+<!--        $.post({-->
+<!--          url: "/addArticleType",-->
+<!--          data: $("#addArticleTypeForm").serialize(),-->
+<!--          success: function (data, status) {-->
+
+<!--            $("#username").text(data.user.userName);-->
+<!--            $("#articleTypeName").text(data.articleTypeName);-->
+<!--            $("#msg").text(status);-->
+<!--          }-->
+<!--        })-->
+<!--      })-->
+
+
+<!--      $("#getArticleTypeList").click(function () {-->
+<!--        $.get({-->
+<!--          url: "/listArticleTypes",-->
+<!--          success: function (data, status){-->
+
+<!--          }-->
+<!--        })-->
+<!--      })-->
+<!--    })-->
+
+<!--  </script>-->
+
+
+</div>
+</body>
+</html>

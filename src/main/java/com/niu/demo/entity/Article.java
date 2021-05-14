@@ -14,6 +14,10 @@ public class Article {
 
     private String articleContent;
 
+    private String articleCreateDate;
+
+    private String articleModifyDate;
+
     @ManyToOne
     private User user;
 
@@ -23,7 +27,7 @@ public class Article {
     @OneToMany(mappedBy = "article")
     private Set<Comment> comments = new HashSet<>();
 
-    public Article(){
+    public Article() {
 
     }
 
@@ -57,6 +61,22 @@ public class Article {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getArticleCreateDate() {
+        return articleCreateDate;
+    }
+
+    public void setArticleCreateDate(String articleCreateDate) {
+        this.articleCreateDate = articleCreateDate;
+    }
+
+    public String getArticleModifyDate() {
+        return articleModifyDate;
+    }
+
+    public void setArticleModifyDate(String articleModifyDate) {
+        this.articleModifyDate = articleModifyDate;
     }
 
     public ArticleType getArticleType() {

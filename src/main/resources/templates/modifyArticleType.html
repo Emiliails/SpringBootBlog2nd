@@ -4,29 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>addArticleType</title>
+    <title>modify</title>
+
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}" type="text/css"/>
-    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
-    <!--    添加文章类型的表单-->
-    <form th:action="@{/addArticleType}" method="post" id="addArticleTypeForm">
+    <!--    修改文章类型的表单-->
+    <form th:action="@{/modifyArticleType}" method="post" id="modifyArticleTypeForm">
+        <div class="form-group">
+            <label for="articleTypeIdInput">文章类型ID</label>
+            <input class="form-control" th:type="text" id="articleTypeIdInput" name="articleTypeId"
+                   th:placeholder="${articleType.articleTypeId}"
+                   th:value="${articleType.articleTypeId}" readonly>
+        </div>
         <div class="form-group">
             <label for="articleTypeNameInput">文章类型名称</label>
-            <input type="text" class="form-control" id="articleTypeNameInput" name="articleTypeName">
+            <input th:type="text" class="form-control" id="articleTypeNameInput" name="articleTypeName"
+                   th:value="${articleType.articleTypeName}">
+            <div class="form-group">
+                <label for="articleTypeStatus">文章类型状态</label>
+                <select multiple class="form-control" id="articleTypeStatusInput" name="articleTypeStatus">
+                    <!--                <c:forEach items="${articleTypeList}" var="articleType">-->
+                    <option>enabled</option>
+                    <option>disabled</option>
+                    <!--                </c:forEach>-->
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            文章类型状态：<input type="radio" id="enabled" name="articleTypeStatus" value="enabled">
-            <label for="enabled">启用</label>
-            <input type="radio" id="disabled" name="articleTypeStatus" value="disabled">
-            <label for="disabled">禁用</label><br>
-        </div>
-        <button type="button" class="btn btn-primary" id="addArticleTypeFormSubmit">添加</button>
+        <button type="button" class="btn btn-primary" id="modifyArticleTypeFormSubmit">添加</button>
     </form>
     <br>
-    <!--    文章类型添加成功的回传信息-->
+    <!--    文章类型修改成功的回传信息-->
     <div id="msg"></div>
     <div id="articleTypeName"></div>
     <div id="articleTypeStatus"></div>
@@ -49,13 +60,14 @@
 
     <script>
         $(function () {
-            // 添加文章的ajax
-            $("#addArticleTypeFormSubmit").click(function () {
+            // 修改文章的ajax
+            $("#modifyArticleTypeFormSubmit").click(function () {
                 $.post({
-                    url: "/addArticleType",
-                    data: $("#addArticleTypeForm").serialize(),
+                    url: "/modifyArticleType",
+                    data: $("#modifyArticleTypeForm").serialize(),
                     success: function (data, status) {
                         $("#msg").text(status);
+                        $("#articleTypeId").text(data.articleTypeId);
                         $("#articleTypeName").text(data.articleTypeName);
                         $("#articleTypeStatus").text(data.articleTypeStatus);
                     }
@@ -84,5 +96,8 @@
 
 
 </div>
+
+this line will not be displayed.
+
 </body>
 </html>

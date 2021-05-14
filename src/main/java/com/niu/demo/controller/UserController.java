@@ -2,10 +2,8 @@ package com.niu.demo.controller;
 
 import com.niu.demo.entity.User;
 import com.niu.demo.service.UserService;
-import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,26 +17,21 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/addUser")
-    @ResponseBody
-    public User addUser() {
-        User user = new User();
-        user.setUserName("syl");
-        user.setPassword("ss");
-
-        return userService.add(user);
+    public String addUser() {
+        return "addUser";
     }
 
     @PostMapping("/addUser")
-    public String addUser(User user) {
-        userService.addUser(user);
-        return "addUserResult";
+    @ResponseBody
+    public User addUser(User user) {
+        userService.add(user);
+        return user;
     }
 
-    @GetMapping("/listUsers")
-    public String findAll(Model model) {
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
-        return "listUsers";
+    @GetMapping("/getUsers")
+    @ResponseBody
+    public List<User> getUsers() {
+        return userService.findAll();
     }
 
     @GetMapping("/login")

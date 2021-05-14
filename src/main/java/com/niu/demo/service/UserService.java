@@ -18,10 +18,6 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    public User addUser(User user) {
-        return userRepository.save(user);
-    }
-
     public List<User> findAll() {
         return userRepository.findAll();
     }
