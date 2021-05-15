@@ -10,7 +10,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 设置忽略的文件夹，可以对静态资源放行
-        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**","/webjars/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/webjars/**");
     }
 
     @Override
@@ -18,7 +18,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
 //        设置验证每个请求，除了排除的那些URL
                 .authorizeRequests()
-                .antMatchers("/content/**","/addUser").permitAll()
+                .antMatchers("/content/**", "/addUser", "/getAllArticles"
+                        , "/searchArticle", "/searchUser", "/displayArticle","/getArticlesByUser").permitAll()
                 .anyRequest().authenticated()
                 .and()
 //        设置基于表单验证，登录页面为“/login”对应的视图文件

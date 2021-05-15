@@ -20,20 +20,20 @@
             <th>姓名</th>
             <th>查看用户信息</th>
             <th>修改用户信息</th>
-            <th>重设用户密码</th>
+            <!--            <th>重设用户密码</th>-->
             <th>禁用用户</th>
         </tr>
         </thead>
         <tbody>
-
         <tr th:each="user:${userList}">
             <td th:text="${user.userId}"></td>
             <td th:text="${user.userName}"></td>
             <td th:text="${user.name}"></td>
             <td><a th:href="@{'/displayUser?userId='+${user.userId}}">查看</a></td>
             <td><a th:href="@{'/modifyUser?userId='+${user.userId}}">修改</a></td>
-            <td><a th:href="@{'/resetUserPassword?userId='+${user.userId}}">重设</a></td>
-            <td><a th:href="@{'/lockUser?userId='+${user.userId}}">禁用</a></td>
+            <!--            <td><a th:href="@{'/resetUserPassword?userId='+${user.userId}}">重设</a></td>-->
+            <td><a th:href="@{'/lockUser?userId='+${user.userId}}"
+                   th:text="${user.isAccountNonLocked}?'当前已启用，点击禁用':'当前已禁用，点击启用'"></a></td>
         </tr>
         </tbody>
     </table>

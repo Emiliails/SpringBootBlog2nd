@@ -64,4 +64,10 @@ public class UserService implements UserDetailsService {
     public List<User> findByUserNameLike(String userNameLike) {
         return userRepository.findByUserNameContaining(userNameLike);
     }
+
+    public void changeUserStatus(int userId) {
+        User user = userRepository.findById(userId).get();
+        user.setAccountNonLocked(!user.isAccountNonLocked());
+        userRepository.save(user);
+    }
 }

@@ -106,4 +106,12 @@ public class UserController {
         model.addAttribute(user);
         return "displayUser";
     }
+
+    @GetMapping("/lockUser")
+    public String changeUserStatus(Model model, @RequestParam("userId") int userId) {
+        userService.changeUserStatus(userId);
+        List<User> userList = userService.findAll();
+        model.addAttribute(userList);
+        return "manageUsers";
+    }
 }

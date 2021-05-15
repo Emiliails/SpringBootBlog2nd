@@ -98,12 +98,16 @@ public class ArticleController {
     @GetMapping("/displayArticle")
     public String displayArticle(Model model, @RequestParam("articleId") int articleId) {
         Article article = articleService.findByArticleId(articleId);
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Comment> commentList = commentService.findByArticle(article);
-        model.addAttribute("user",user);
         model.addAttribute("article", article);
-        model.addAttribute("commentList",commentList);
-        return "/displayArticle";
+        model.addAttribute("commentList", commentList);
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+            return "/displayArticleNonLogin";
+        } else {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+            return "/displayArticle";
+        }
     }
 
     @GetMapping("/searchArticle")

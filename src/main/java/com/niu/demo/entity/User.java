@@ -28,6 +28,7 @@ public class User implements UserDetails {
     private String description;
     private String registerDate;
     private String role;
+    private boolean isAccountNonLocked = true;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
@@ -113,7 +114,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.isAccountNonLocked;
     }
 
     @Override
@@ -193,6 +194,15 @@ public class User implements UserDetails {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public boolean getIsAccountNonLocked(){
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
 
 
 }
