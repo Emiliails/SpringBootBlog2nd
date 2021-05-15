@@ -65,6 +65,18 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping("/searchUser")
+    public String searchUser() {
+        return "searchUser";
+    }
+
+    @PostMapping("/searchUser")
+    public String searchUser(Model model, String userNameLike) {
+        List<User> userList = userService.findByUserNameLike(userNameLike);
+        model.addAttribute(userList);
+        return "searchUser";
+    }
+
 
     @GetMapping("/login")
     public String login(User user) {
@@ -85,7 +97,12 @@ public class UserController {
 
     @GetMapping("/displayCurrentUser")
     public String displayCurrentUser(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        int userId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+        User user = userService.findById(userId);
+
         model.addAttribute(user);
         return "displayUser";
     }

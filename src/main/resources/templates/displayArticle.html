@@ -18,6 +18,78 @@
     <h6 th:text="'修改时间'+${article.articleModifyDate}"></h6>
     <hr>
     <p th:text="${article.articleContent}"></p>
+    <hr>
+    <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample">
+            评论
+        </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <form th:action="@{/addComment}" method="post">
+                <div class="form-group">
+                    <label for="userId">评论者</label>
+                    <input type="text" class="form-control" id="userId" name="userId"
+                           th:value="${user.userId}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="articleId">文章号</label>
+                    <input type="text" class="form-control" id="articleId" name="articleId"
+                           th:value="${article.articleId}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="commentContent">评论内容</label>
+                    <textarea class="form-control" id="commentContent" name="commentContent" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">评论</button>
+            </form>
+        </div>
+    </div>
+    <h4>评论区</h4>
+    <table th:each="comment:${commentList}">
+        <tbody>
+        <tr>
+            <th th:text="${comment.user.userName}+'的评论(评论号'+${comment.commentId}+')'"></th>
+            <td th:text="${comment.commentContent}"></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="card card-body">
+                    <form th:action="@{/addReply}" method="post">
+                        <div class="form-group">
+                            <label for="userId">回复者</label>
+                            <input type="text" class="form-control" name="userId"
+                                   th:value="${user.userId}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="articleId">文章号</label>
+                            <input type="text" class="form-control" name="articleId"
+                                   th:value="${article.articleId}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="articleId">评论号</label>
+                            <input type="text" class="form-control" id="replyIdInput" name="commentId"
+                                   th:value="${comment.commentId}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="replyContent" class="sr-only">Password</label>
+                            <input type="text" class="form-control" id="replyContent" name="replyContent"
+                                   placeholder="回复评论">
+                        </div>
+                        <button type="submit" class="btn btn-primary">回复</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        <tr th:each="reply:${comment.replies}">
+            <th th:text="${reply.user.userName}+'的回复(回复号'+${reply.replyId}+')'"></th>
+            <td th:text="${reply.replyContent}"></td>
+        </tr>
+        </tbody>
+
+
+    </table>
 </div>
 
 this line will not be displayed.

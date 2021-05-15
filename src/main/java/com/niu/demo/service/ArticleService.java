@@ -2,9 +2,11 @@ package com.niu.demo.service;
 
 import com.niu.demo.entity.Article;
 import com.niu.demo.entity.ArticleType;
+import com.niu.demo.entity.Comment;
 import com.niu.demo.entity.User;
 import com.niu.demo.repository.ArticleRepository;
 import com.niu.demo.repository.ArticleTypeRepository;
+import com.niu.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ public class ArticleService {
     private ArticleRepository articleRepository;
     @Autowired
     private ArticleTypeRepository articleTypeRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public Article add(Article article) {
         article.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -56,5 +60,10 @@ public class ArticleService {
 
     public List<Article> findByArticleNameLike(String articleNameLike) {
         return articleRepository.findByArticleNameLike(articleNameLike);
+    }
+
+    public List<Article> findByUserId(int userId) {
+        User user = userRepository.findById(userId).get();
+        return articleRepository.findByUser(user);
     }
 }

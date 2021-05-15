@@ -1,9 +1,8 @@
 package com.niu.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Comment {
@@ -18,6 +17,10 @@ public class Comment {
 
     @ManyToOne
     private Article article;
+
+    @OneToMany(mappedBy = "comment")
+    private Set<Reply> replies =new HashSet<>();
+
 
     public int getCommentId() {
         return commentId;
@@ -49,5 +52,13 @@ public class Comment {
 
     public void setArticle(Article article) {
         this.article = article;
+    }
+
+    public Set<Reply> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(Set<Reply> replies) {
+        this.replies = replies;
     }
 }

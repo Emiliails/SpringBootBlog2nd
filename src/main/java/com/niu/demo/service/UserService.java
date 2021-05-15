@@ -60,4 +60,8 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
         return user;
     }
+
+    public List<User> findByUserNameLike(String userNameLike) {
+        return userRepository.findByUserNameContaining(userNameLike);
+    }
 }

@@ -2,9 +2,14 @@ package com.niu.demo.controller;
 
 import com.niu.demo.entity.Article;
 import com.niu.demo.entity.ArticleType;
+import com.niu.demo.entity.Comment;
+import com.niu.demo.entity.User;
 import com.niu.demo.service.ArticleService;
 import com.niu.demo.service.ArticleTypeService;
+import com.niu.demo.service.CommentService;
+import com.niu.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +25,10 @@ public class ArticleController {
     private ArticleService articleService;
     @Autowired
     private ArticleTypeService articleTypeService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/addArticle")
     public String addArticle(Model model) {
@@ -40,6 +49,13 @@ public class ArticleController {
         List<Article> articleList = articleService.list();
         model.addAttribute("articleList", articleList);
         return "/getArticles";
+    }
+
+    @GetMapping("/getArticlesByUser")
+    public String getArticlesByUser(Model model, @RequestParam("userId") int userId) {
+        List<Article> articleList = articleService.findByUserId(userId);
+        model.addAttribute(articleList);
+        return "/getArticlesByUser";
     }
 
     @GetMapping("/getAllArticles")
@@ -82,7 +98,11 @@ public class ArticleController {
     @GetMapping("/displayArticle")
     public String displayArticle(Model model, @RequestParam("articleId") int articleId) {
         Article article = articleService.findByArticleId(articleId);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Comment> commentList = commentService.findByArticle(article);
+        model.addAttribute("user",user);
         model.addAttribute("article", article);
+        model.addAttribute("commentList",commentList);
         return "/displayArticle";
     }
 

@@ -1,6 +1,7 @@
 package com.niu.demo.repository;
 
 import com.niu.demo.entity.Article;
+import com.niu.demo.entity.Comment;
 import com.niu.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
