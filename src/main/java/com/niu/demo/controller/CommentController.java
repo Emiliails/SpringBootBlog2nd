@@ -27,7 +27,7 @@ public class CommentController {
         comment.setUser(user);
         comment.setArticle(article);
         commentService.addComment(comment);
-        return"redirect:displayArticle?articleId=" + articleId;
+        return"redirect:d" + articleId;
 
     }
 
